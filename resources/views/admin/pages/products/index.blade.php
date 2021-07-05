@@ -5,68 +5,53 @@
 @section('content')
 
         <h1>Exibindo os Produtos</h1>
-
-        @if (isset($products))
-            @foreach ($products as $product)
-              <p class="@if ($loop->last) last @endif">{{$product}}</p>  
-            @endforeach
-        @endif
+        <a href="{{route('products.create')}}" class="btn btn-primary">Cadastrar</a>
 
         <hr>
 
-        @forelse ($products as $product)
-            <p>{{$product}}</p>
-        @empty
-            <p> Não existem produtos cadastrados.</p>
-        @endforelse
+        <form action="{{ route('products.search') }}" method="post" class="form form-inline">
+            @csrf
+            <input type="text" name="filter" placeholder="Filtrar:" id="" class="form-control" value="{{ $filters['filter'] ?? ''}}">
+            <button type="submit" class="btn btn-info">Pesquisar</button>
+        </form>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th width="100">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <td>
+                            @if ($product->image)
+                                <img src="{{ url("storage/$product->image")}}" alt="{{$product->name}}" style="max-width:50px">
+                            @else
+                                
+                            @endif
+                        </td>
+                        <td>{{$product->name}}</td>
+                        <td>{{$product->price}}</td>
+                        <td>
+                            <a href="{{ route('products.edit', $product->id)}}">Edit</a>
+                            <a href="{{ route('products.show', $product->id)}}">Detalhes</a>
+                        </td>
+                    </tr>
+            
+                @endforeach
+            </tbody>
+        </table>
 
-        @if ($teste === 123)
-           <p> É Igual </p>
-        @elseif($teste === '123')
-           <p> com aspas </p>
-        @endif
-        <br>
-        @unless ($teste ==='123')
-           <p> retornou falso </p>
-        @endunless
-        <br>
-        @isset($teste2)
-            <p>nao é null</p>
-        @endisset
-        <br>
-        @empty($teste3)
-           <p> Vazio </p>
-        @endempty
-        <br>
-        @auth
-            <p> Autenticado </p>
+
+        @if (isset($filters))
+            {!! $products->appends($filters)->links() !!}
         @else
-            <p> Não Autenticado </p>
-        @endauth
-
-        @guest
-            <p>Não autenticado</p>
-        @endguest
-
-        @switch($teste)
-
-            @case(1)
-                igual 1 
-            @break
-
-            @case(2)
-                igual 2 
-            @break
-
-            @case(123)
-                igual 123
-            @break  
-
-            @default
-                default
-
-        @endswitch
-
+            {!! $products->links() !!}
+        @endif
 
 
 @endsection
