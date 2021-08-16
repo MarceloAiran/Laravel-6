@@ -1,3 +1,34 @@
+# CRUD LARAVEL 6
+
+### Operações Básicas de Criação, Leitura, Exclusão, Atualização, Paginação e Pesquisa usando Laravel
+* Gerenciamento de Rotas
+* Validações com Request
+* Eloquent
+* Migrations 
+* Seeds
+* Factories 
+* Controllers 
+* Models 
+* Middleware
+* Blade
+
+
+### :pushpin:  Recursos usados ​​
+* PHP 7.2
+* Laravel 6.*
+
+
+### :pushpin: Versão PHP
+
+requires ```PHP >= 7.2```
+
+
+
+
+
+
+
+
 <<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
